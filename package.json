@@ -25,14 +25,14 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@types/cors": "^2.8.19",
-    "@types/express": "^5.0.6",
-    "@types/node": "^25.9.3",
-    "concurrently": "^10.0.3",
-    "cross-env": "^10.1.0",
-    "tsx": "^4.22.4",
-    "typescript": "^6.0.3",
-    "vite": "^8.0.16",
-    "vite-plugin-singlefile": "^2.3.3"
+    "@types/cors": "2.8.19",
+    "@types/express": "5.0.6",
+    "@types/node": "25.9.3",
+    "concurrently": "10.0.3",
+    "cross-env": "10.1.0",
+    "tsx": "4.22.4",
+    "typescript": "6.0.3",
+    "vite": "8.0.16",
+    "vite-plugin-singlefile": "2.3.3"
   }
 }
