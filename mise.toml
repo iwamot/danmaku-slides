@@ -2,7 +2,7 @@ min_version = "2026.6.3"
 
 [tools]
 biome = "2.5.0"
-node = "24.16.0"
+node = "24.17.0"
 
 [task_config]
 includes = [
