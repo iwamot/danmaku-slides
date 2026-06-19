@@ -1,0 +1,8 @@
+min_version = "2026.6.3"
+
+[tools]
+
+[task_config]
+includes = [
+  "git::https://github.com/iwamot/mise-tasks.git//.mise/tasks?ref=v2.4.0",
+]

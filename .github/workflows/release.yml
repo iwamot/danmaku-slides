@@ -1,0 +1,14 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions: {}
+
+jobs:
+  release:
+    uses: iwamot/workflows/.github/workflows/release-only.yml@5a25b9d63627c844df2612e67ff51313b4d16b62 # v8.1.0
+    permissions:
+      contents: write  # to create the GitHub Release
