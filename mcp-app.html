@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>Danmaku Slides</title>
+</head>
+<body>
+  <main class="main">
+    <button type="button" class="hamburger" id="menu-btn" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
+    <span class="status-dot" id="status-dot" hidden></span>
+    <div class="menu" id="menu" hidden>
+      <button type="button" class="menu-item" id="menu-open-pdf">PDF を開く</button>
+      <div class="menu-separator"></div>
+      <button type="button" class="menu-item" id="menu-comments">コメント受信を開始</button>
+      <div class="menu-separator"></div>
+      <button type="button" class="menu-item" id="menu-toggle-fullscreen">全画面表示</button>
+    </div>
+    <div class="canvas-wrap">
+      <canvas id="canvas" class="canvas"></canvas>
+      <div class="initial-hint" id="initial-hint">左上のメニューから PDF を開いてください</div>
+      <div class="danmaku" id="danmaku"></div>
+    </div>
+    <input type="file" accept="application/pdf" id="file-input" hidden>
+    <div class="status" id="status"></div>
+  </main>
+  <script type="module" src="/src/mcp-app.ts"></script>
+</body>
+</html>
