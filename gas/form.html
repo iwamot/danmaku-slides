@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <base target="_top">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body style="font-family: system-ui, sans-serif; max-width: 480px; margin: 0 auto; padding: 1.5rem 1rem;">
+  <h2 style="margin-top: 0;">コメントを送ってみよう！</h2>
+  <input id="text" maxlength="60" placeholder="コメントを入力"
+         style="width: 100%; font-size: 1.1rem; padding: 0.7rem; box-sizing: border-box;">
+  <div id="colors" style="margin-top: 0.8rem; display: flex; flex-wrap: wrap; gap: 1rem;"></div>
+  <button id="send"
+          style="margin-top: 2.2rem; font-size: 1.05rem; padding: 0.7rem 2rem;">送信</button>
+  <p id="msg" style="color: gray; min-height: 1.2em;"></p>
+
+  <script>
+    const COLORS = ["#ffffff", "#ffe34d", "#7fd1ff", "#ff9ecb", "#b6ff9e", "#ffae5c"];
+    var selectedColor = COLORS[0];
+
+    const textEl = document.getElementById("text");
+    const sendEl = document.getElementById("send");
+    const msgEl = document.getElementById("msg");
+    const colorsEl = document.getElementById("colors");
+
+    const swatches = COLORS.map(function (color) {
+      const b = document.createElement("button");
+      b.type = "button";
+      // The rim is a single box-shadow ring (no real border), so selecting just
+      // makes that one ring darker and thicker. box-shadow draws outside the box,
+      // so it grows outward without shifting neighboring swatches.
+      b.style.cssText =
+        "width:2.5rem;height:2.5rem;border-radius:50%;cursor:pointer;border:none;background:" + color;
+      b.style.boxShadow = color === selectedColor ? "0 0 0 4px #999" : "0 0 0 2px #ccc";
+      b.addEventListener("click", function () {
+        selectedColor = color;
+        swatches.forEach(function (s, i) {
+          s.style.boxShadow = COLORS[i] === selectedColor ? "0 0 0 4px #999" : "0 0 0 2px #ccc";
+        });
+      });
+      colorsEl.appendChild(b);
+      return b;
+    });
+
+    function send() {
+      const value = textEl.value.trim();
+      if (!value) return;
+      sendEl.disabled = true;
+      msgEl.textContent = "送信中…";
+      google.script.run
+        .withSuccessHandler(function () {
+          textEl.value = "";
+          msgEl.textContent = "送信しました！";
+          sendEl.disabled = false;
+        })
+        .withFailureHandler(function (err) {
+          msgEl.textContent = "失敗: " + err.message;
+          sendEl.disabled = false;
+        })
+        .submit(value, selectedColor);
+    }
+
+    sendEl.addEventListener("click", send);
+    textEl.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") send();
+    });
+  </script>
+</body>
+</html>
