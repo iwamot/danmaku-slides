@@ -30,7 +30,7 @@
     "@types/node": "25.9.5",
     "concurrently": "10.0.4",
     "cross-env": "10.1.0",
-    "tsx": "4.23.7",
+    "tsx": "4.23.8",
     "typescript": "7.0.2",
     "vite": "8.2.0",
     "vite-plugin-singlefile": "2.3.3"
