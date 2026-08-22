@@ -7,7 +7,7 @@ lockfile = true
 locked = true
 
 [tools]
-biome = "2.5.9"
+biome = "2.5.10"
 node = "24.19.0"
 
 [task_config]
