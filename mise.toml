@@ -8,7 +8,7 @@ locked = true
 
 [tools]
 biome = "2.5.10"
-node = "24.19.0"
+node = "24.20.0"
 
 [task_config]
 includes = [
