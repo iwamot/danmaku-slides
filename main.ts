@@ -5,12 +5,11 @@
  * stdio:          tsx main.ts --stdio
  */
 
-import { createMcpExpressApp } from "@modelcontextprotocol/sdk/server/express.js";
-import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
+import { NodeStreamableHTTPServerTransport } from "@modelcontextprotocol/node";
+import type { McpServer } from "@modelcontextprotocol/server";
+import { StdioServerTransport } from "@modelcontextprotocol/server/stdio";
 import cors from "cors";
-import type { Request, Response } from "express";
+import express, { type Request, type Response } from "express";
 import { createServer } from "./server.js";
 
 // Load .env (e.g. COMMENTS_FEED_URL) when present; in deployments the value can
@@ -27,12 +26,13 @@ try {
 export async function startStreamableHTTPServer(createServer: () => McpServer): Promise<void> {
   const port = parseInt(process.env.PORT ?? "3001", 10);
 
-  const app = createMcpExpressApp({ host: "0.0.0.0" });
+  const app = express();
+  app.use(express.json());
   app.use(cors());
 
   app.all("/mcp", async (req: Request, res: Response) => {
     const server = createServer();
-    const transport = new StreamableHTTPServerTransport({
+    const transport = new NodeStreamableHTTPServerTransport({
       sessionIdGenerator: undefined,
     });
 
