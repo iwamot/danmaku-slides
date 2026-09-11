@@ -5,8 +5,8 @@ import {
   registerAppResource,
   registerAppTool,
 } from "@modelcontextprotocol/ext-apps/server";
-import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import type { CallToolResult, ReadResourceResult } from "@modelcontextprotocol/sdk/types.js";
+import type { CallToolResult, ReadResourceResult } from "@modelcontextprotocol/server";
+import { McpServer } from "@modelcontextprotocol/server";
 import { z } from "zod";
 
 const DIST_DIR = import.meta.filename.endsWith(".ts")
@@ -56,7 +56,7 @@ export function createServer(): McpServer {
       title: "Present",
       description:
         "Open the danmaku slides view: a PDF slide presenter that overlays live audience comments scrolling across the slide.",
-      inputSchema: {},
+      inputSchema: z.object({}),
       outputSchema: z.object({ ok: z.boolean() }),
       _meta: { ui: { resourceUri, visibility: ["model"] } },
     },
@@ -82,9 +82,9 @@ export function createServer(): McpServer {
       description:
         "Fetch new audience comments (those with id greater than `since`) for the presenter danmaku. " +
         "The view polls this and renders new comments itself; the model does not need to read them.",
-      inputSchema: {
+      inputSchema: z.object({
         since: z.number().int().nonnegative().optional(),
-      },
+      }),
       outputSchema: z.object({
         comments: z.array(
           z.object({
