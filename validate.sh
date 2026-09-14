@@ -20,13 +20,26 @@ npm query '*' --json | node -e '
   process.stdin.on("data", (chunk) => (raw += chunk));
   process.stdin.on("end", () => {
     const allowed = new Set([
+      // SPDX identifiers
       "0BSD",
       "Apache-2.0",
+      "BlueOak-1.0.0",
       "BSD-2-Clause",
       "BSD-3-Clause",
+      "CC0-1.0",
+      "CNRI-Python",
       "ISC",
       "MIT",
+      "MIT-0",
+      "MIT-CMU",
       "MPL-2.0",
+      "PSF-2.0",
+      "Python-2.0",
+      "Zlib",
+      // SPDX expressions and free-form license fields
+      "(AFL-2.1 OR BSD-3-Clause)",
+      "(BSD-2-Clause OR MIT OR Apache-2.0)",
+      "MIT OR Apache",
     ]);
     const rejected = JSON.parse(raw).filter((pkg) => !allowed.has(pkg.license));
     for (const pkg of rejected) {
