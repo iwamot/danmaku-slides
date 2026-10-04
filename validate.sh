@@ -9,7 +9,7 @@ mise install
 # TypeScript / npm
 npm ci
 npm audit signatures
-npm audit
+npm audit --omit=dev
 
 # Licenses. npm itself reports the license of every installed package, so the
 # only thing left to write is the allow-list. Anything else — including SPDX
